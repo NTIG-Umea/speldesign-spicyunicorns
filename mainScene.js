@@ -2,6 +2,7 @@ class mainScene extends Phaser.Scene{
     constructor(){
         super({key:"mainScene"});
     }
+    
 
     preload(){
         this.load.image('player', 'Assets/player.png');
@@ -14,9 +15,12 @@ class mainScene extends Phaser.Scene{
         this.lane4 = 700;
         this.delayTime = 15;
         this.currentDelay = 0;
+        this.enemySpawnRate = 120;
+        this.currentTimeSpawn = 0;
     }
 
     create(){
+        
         this.player = this.add.sprite(300, 400, 'player');
         this.player.x = this.lane3
 
@@ -70,6 +74,16 @@ class mainScene extends Phaser.Scene{
         }
         if (this.currentDelay > 0){
             this.currentDelay--;
+        }
+        this.enemyAdd();
+        this.currentTimeSpawn--;
+    }
+
+    enemyAdd() {
+        import {randplacer} from "./EnemyPlacer.js";
+        if (this.currentTimeSpawn == 0){
+            this.add.image(randplacer(this.lane1,this.lane2,this.lane3,this.lane4), 0);
+            this.currentTimeSpawn = this.enemySpawnRate;
         }
     }
 }
