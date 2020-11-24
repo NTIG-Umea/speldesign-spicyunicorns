@@ -5,6 +5,8 @@ class mainScene extends Phaser.Scene{
 
     preload(){
         this.load.image('player', 'Assets/player.png');
+        this.load.image('enemy', 'Assets/enemy.png');
+        this.load.image('powerUp', 'Assets/powerup.png');
 
         this.lane1 = 100;
         this.lane2 = 300;
