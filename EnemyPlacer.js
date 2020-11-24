@@ -2,7 +2,7 @@
 
 enemyplacer(lane1, lane2, lane3, lane4); {
 
-    var value = Phaser.Math.Between(1, 4);
+    var value = Phaser.Math.Between(1, 3);
 
     if (value = 1)
         return lane1;
@@ -13,6 +13,6 @@ enemyplacer(lane1, lane2, lane3, lane4); {
     if (value = 3)
         return lane3;
 
-    if (value = 4)
+    else
         return lane4;
 }
