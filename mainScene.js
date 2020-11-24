@@ -10,7 +10,7 @@ class mainScene extends Phaser.Scene{
         this.lane2 = 300;
         this.lane3 = 500;
         this.lane4 = 700;
-        this.delay = 15;
+        this.delayTime = 15;
         this.currentDelay = 0;
     }
 
@@ -36,7 +36,7 @@ class mainScene extends Phaser.Scene{
                 this.player.x = this.lane3;
                 console.log("hej");
             }
-            this.currentDelay = this.delay;
+            this.currentDelay = this.delayTime;
         }
     }
 
@@ -52,7 +52,7 @@ class mainScene extends Phaser.Scene{
             if (this.player.x == this.lane1){
                 this.player.x = this.lane2;
             }
-            this.currentDelay = this.delay;
+            this.currentDelay = this.delayTime;
         }
     }
 
