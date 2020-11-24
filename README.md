@@ -3,6 +3,7 @@
 
 TODO
 
+Powerup placer
 Powerups effect
 Scoring system
 Background moving
@@ -10,6 +11,8 @@ Background moving
 In progress
 
 Animation for player movement
+
+Enemy Placer
 
 Done
 
