@@ -7,6 +7,7 @@ class mainScene extends Phaser.Scene{
         this.load.image('player', 'Assets/player.png');
         this.load.image('enemy', 'Assets/enemy.png');
         this.load.image('powerUp', 'Assets/powerup.png');
+        const rand = require("./EnemyPlacer.js");
 
         this.lane1 = 100;
         this.lane2 = 300;
