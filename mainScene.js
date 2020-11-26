@@ -9,10 +9,10 @@ class mainScene extends Phaser.Scene{
         this.load.image('enemy', 'Assets/enemy.png');
         this.load.image('powerUp', 'Assets/powerup.png');
 
-        this.lane1 = 100;
-        this.lane2 = 300;
-        this.lane3 = 500;
-        this.lane4 = 700;
+        this.lane1 = 200;
+        this.lane2 = 400;
+        this.lane3 = 600;
+        this.lane4 = 800;
         this.delayTime = 15;
         this.currentDelay = 0;
         this.enemySpawnRate = 120;
@@ -80,10 +80,30 @@ class mainScene extends Phaser.Scene{
     }
 
     enemyAdd() {
-        import {randplacer} from "./EnemyPlacer.js";
         if (this.currentTimeSpawn == 0){
-            this.add.image(randplacer(this.lane1,this.lane2,this.lane3,this.lane4), 0);
-            this.currentTimeSpawn = this.enemySpawnRate;
+
+            var amount = this.getRandomInt(3) + 1;
+
+            for(var i = 0; i < amount; i++){
+                var x = this.getRandomInt(4) + 1;
+                if ( x == 1)
+                this.physics.add.image(this.lane4, 128, 'enemy');
+                else if ( x == 2)
+                this.physics.add.image(this.lane3, 128, 'enemy');
+                else if ( x == 3)
+                this.physics.add.image(this.lane2, 128, 'enemy');
+                else 
+                this.physics.add.image(this.lane1, 128, 'enemy');
+            }
+                this.currentTimeSpawn = this.enemySpawnRate;
         }
     }
+
+    powerUpAdd(){
+        
+    }
+
+    getRandomInt(max) {
+        return Math.floor(Math.random() * Math.floor(max));
+      }
 }

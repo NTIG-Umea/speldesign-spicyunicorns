@@ -1,5 +1,4 @@
-
-
+/*
 randplacer(lane1, lane2, lane3, lane4); {
 
     var value = Phaser.Math.Between(1, 3);
@@ -15,4 +14,4 @@ randplacer(lane1, lane2, lane3, lane4); {
 
     else
         return lane4;
-}
+}*/
