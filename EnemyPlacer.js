@@ -15,4 +15,6 @@ randplacer(lane1, lane2, lane3, lane4); {
 
     else
         return lane4;
+
+    this.randomSpawnLocX = this.randplacer(ig.system.width - 20, ig.system.width / 20);
 }
