@@ -1,3 +1,6 @@
+import Phaser from 'phaser';
+import mainScene from './mainScene'
+
 var config = {
     type: Phaser.AUTO,
     width: 1000,

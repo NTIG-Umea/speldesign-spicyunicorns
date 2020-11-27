@@ -1,18 +1,22 @@
-class mainScene extends Phaser.Scene{
+import Phaser from 'phaser';
+import Assets from './Assets/*.png';
+
+export default class mainScene extends Phaser.Scene{
     constructor(){
         super({key:"mainScene"});
     }
     
 
     preload(){
-        this.load.image('player', 'Assets/player.png');
-        this.load.image('enemy', 'Assets/enemy.png');
-        this.load.image('powerUp', 'Assets/powerup.png');
+        console.table(Assets);
+        this.load.image('player', 'Assets.player');
+        this.load.image('enemy', 'Assets.enemy');
+        this.load.image('powerUp', 'Assets.powerup');
 
         this.lane1 = 200;
         this.lane2 = 400;
-        this.lane3 = 600;
-        this.lane4 = 800;
+        this.lane3 = 600; 
+        this.lane4 = 800; 
         this.delayTime = 15;
         this.currentDelay = 0;
         this.enemySpawnRate = 120;
@@ -22,7 +26,7 @@ class mainScene extends Phaser.Scene{
     create(){
         
         this.player = this.add.sprite(this.lane4, 900-256, 'player');
-        this.player.x = this.lane3
+        this.player.x = this.lane3;
 
         this.cursors = this.input.keyboard.createCursorKeys();
     }
