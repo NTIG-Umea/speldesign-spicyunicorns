@@ -1,0 +1,20 @@
+{
+  "name": "speldesign-spicyunicorns",
+  "version": "1.0.0",
+  "description": "",
+  "main": "EnemyPlacer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NTIG-Umea/speldesign-spicyunicorns.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NTIG-Umea/speldesign-spicyunicorns/issues"
+  },
+  "homepage": "https://github.com/NTIG-Umea/speldesign-spicyunicorns#readme"
+}
