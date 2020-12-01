@@ -9,9 +9,9 @@ export default class mainScene extends Phaser.Scene{
 
     preload(){
         console.table(Assets);
-        this.load.image('player', 'Assets.player');
-        this.load.image('enemy', 'Assets.enemy');
-        this.load.image('powerUp', 'Assets.powerup');
+        this.load.image('player', Assets.player);
+        this.load.image('enemy', Assets.enemy);
+        this.load.image('powerUp', Assets.powerup);
 
         this.lane1 = 200;
         this.lane2 = 400;
