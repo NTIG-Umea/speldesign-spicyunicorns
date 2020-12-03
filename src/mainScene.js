@@ -91,13 +91,13 @@ export default class mainScene extends Phaser.Scene{
             for(var i = 0; i < amount; i++){
                 var x = this.getRandomInt(4) + 1;
                 if ( x == 1)
-                this.physics.add.image(this.lane4, -256, 'enemy').setVelocity(0, 900);
+                this.physics.add.image(this.lane4, -256, 'enemy').body.setVelocityY(900);
                 else if ( x == 2)
-                this.physics.add.image(this.lane3, -256, 'enemy').setVelocity(0, 900);
+                this.physics.add.image(this.lane3, -256, 'enemy').body.setVelocityY(900);
                 else if ( x == 3)
-                this.physics.add.image(this.lane2, -256, 'enemy').setVelocity(0, 900);
+                this.physics.add.image(this.lane2, -256, 'enemy').body.setVelocityY(900);
                 else 
-                this.physics.add.image(this.lane1, -256, 'enemy').setVelocity(0, 900);
+                this.physics.add.image(this.lane1, -256, 'enemy').body.setVelocityY(900);
             }
                 this.currentTimeSpawn = this.enemySpawnRate;
         }
