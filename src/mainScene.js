@@ -1,14 +1,20 @@
-import Phaser from 'phaser';
+import Phaser, { Game } from 'phaser';
 import Assets from './Assets/*.png';
 
 export default class mainScene extends Phaser.Scene{
     constructor(){
-        super({key:"mainScene"});
+        super({key:"mainScene", 
+        physics: {
+            arcade :{
+                gravity: {y: 200},
+                debug: false
+            }
+        }
+    });
     }
     
 
     preload(){
-        console.table(Assets);
         this.load.image('player', Assets.player);
         this.load.image('enemy', Assets.enemy);
         this.load.image('powerUp', Assets.powerup);
@@ -17,18 +23,47 @@ export default class mainScene extends Phaser.Scene{
         this.lane2 = 400;
         this.lane3 = 600; 
         this.lane4 = 800; 
-        this.delayTime = 15;
+        this.delayTime = 10;
         this.currentDelay = 0;
         this.enemySpawnRate = 120;
         this.currentTimeSpawn = 0;
     }
 
     create(){
-        
-        this.player = this.add.sprite(this.lane4, 900-256, 'player');
+
+        this.player = this.add.sprite(this.lane4, 900-256, 'player')
         this.player.x = this.lane3;
 
         this.cursors = this.input.keyboard.createCursorKeys();
+
+        this.enemies = this.physics.add.group();
+
+        this.physics.add.collider(this.player, this.enemies, this.enemyCollision, null, this);
+
+        this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+
+        this.timer = this.time.addEvent({
+            delay: 500,                // ms
+            loop: true
+        });
+    }
+
+    update(time, delta){
+        if (this.cursors.left.isDown){
+            this.moveLeft();
+        }
+        if (this.cursors.right.isDown){
+            this.moveRight();
+        }
+        if (this.currentDelay > 0){
+            this.currentDelay--;
+        }
+        this.enemyAdd();
+        this.currentTimeSpawn--;
+    }
+
+    enemyCollision(){
+        console.log("funkar");
     }
 
     moveLeft(){
@@ -69,20 +104,6 @@ export default class mainScene extends Phaser.Scene{
         }
     }
 
-    update(time, delta){
-        if (this.cursors.left.isDown){
-            this.moveLeft();
-        }
-        if (this.cursors.right.isDown){
-            this.moveRight();
-        }
-        if (this.currentDelay > 0){
-            this.currentDelay--;
-        }
-        this.enemyAdd();
-        this.currentTimeSpawn--;
-    }
-
     enemyAdd() {
         if (this.currentTimeSpawn == 0){
 
@@ -90,22 +111,41 @@ export default class mainScene extends Phaser.Scene{
 
             for(var i = 0; i < amount; i++){
                 var x = this.getRandomInt(4) + 1;
-                if ( x == 1)
-                this.physics.add.image(this.lane4, -256, 'enemy').body.setVelocityY(900);
-                else if ( x == 2)
-                this.physics.add.image(this.lane3, -256, 'enemy').body.setVelocityY(900);
-                else if ( x == 3)
-                this.physics.add.image(this.lane2, -256, 'enemy').body.setVelocityY(900);
-                else 
-                this.physics.add.image(this.lane1, -256, 'enemy').body.setVelocityY(900);
+                let enemy;
+                if ( x == 1){
+                    enemy = this.enemies.create(this.lane4, -256, 'enemy');
+                    enemy.body.setEnable();
+                    enemy.body.setVelocityY(900);
+                }
+                else if ( x == 2){
+                    enemy = this.enemies.create(this.lane3, -256, 'enemy');
+                    enemy.body.setVelocityY(900);
+                }
+                else if ( x == 3){
+                    enemy = this.enemies.create(this.lane2, -256, 'enemy');
+                    enemy.body.setVelocityY(900);
+                }
+                else{
+                    enemy = this.enemies.create(this.lane1, -256, 'enemy');
+                    enemy.body.setVelocityY(900);
+                }
             }
+
                 this.currentTimeSpawn = this.enemySpawnRate;
         }
     }
 
     powerUpAdd(){
+        function collectpowe (player, star)
+{
+    star.disableBody(true, true);
+
+    score += 10;
+    scoreText.setText('Score: ' + score);
+}
         
     }
+    
 
     getRandomInt(max) {
         return Math.floor(Math.random() * Math.floor(max));

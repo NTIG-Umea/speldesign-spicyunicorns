@@ -5,16 +5,17 @@ TODO
 
 Powerup placer
 Powerups effect
-Scoring system
 Background moving
+Animation for player movement
 
 In progress
 
-Animation for player movement
+Scoring system
 
-Enemy Placer
+enemy collision
 
 Done
 
 Movement for player
 random placer
+Enemy Placer
