@@ -31,13 +31,11 @@ export default class mainScene extends Phaser.Scene{
         this.player = this.add.sprite(this.lane4, 900-256, 'player')
         this.player.x = this.lane1;
 
-        console.log(this.player);
-
         this.cursors = this.input.keyboard.createCursorKeys();
 
         this.enemies = this.physics.add.group();
 
-        this.physics.add.collider(this.player, this.enemies, this.enemyCollision, null, this);
+        this.physics.add.overlap(this.player, this.enemies, this.enemyCollision, this);
 
         this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
 
@@ -56,9 +54,6 @@ export default class mainScene extends Phaser.Scene{
     }
 
     moveLeft(){
-        
-
-        console.log(this.player);
 
         if (this.player.x == this.lane2){
             this.player.x = this.lane1;
