@@ -25,8 +25,6 @@ export default class mainScene extends Phaser.Scene{
         this.lane4 = 800; 
         this.delayTime = 10;
         this.currentDelay = 0;
-        this.enemySpawnRate = 120;
-        this.currentTimeSpawn = 0;
     }
 
     create(){
@@ -42,10 +40,9 @@ export default class mainScene extends Phaser.Scene{
 
         this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
 
-        this.timer = this.time.addEvent({
-            delay: 500,                // ms
-            loop: true
-        });
+        this.timedEvent = this.time.addEvent({ delay: 1000, callback: this.enemyAdd, callbackScope: this, loop: true });
+        
+        this.input.keyboard.on('keydown_D', this.moveRight);
     }
 
     update(time, delta){
@@ -58,8 +55,6 @@ export default class mainScene extends Phaser.Scene{
         if (this.currentDelay > 0){
             this.currentDelay--;
         }
-        this.enemyAdd();
-        this.currentTimeSpawn--;
     }
 
     enemyCollision(){
@@ -67,45 +62,37 @@ export default class mainScene extends Phaser.Scene{
     }
 
     moveLeft(){
-        if (this.currentDelay == 0){
+        if (this.player.x == this.lane2){
+            this.player.x = this.lane1;
 
-            if (this.player.x == this.lane2){
-                this.player.x = this.lane1;
+        }
+        if (this.player.x == this.lane3){
+            this.player.x = this.lane2;
 
-            }
-            if (this.player.x == this.lane3){
-                this.player.x = this.lane2;
+        }
+        if (this.player.x == this.lane4){
+            this.player.x = this.lane3;
 
-            }
-            if (this.player.x == this.lane4){
-                this.player.x = this.lane3;
-
-            }
-            this.currentDelay = this.delayTime;
         }
     }
 
     moveRight(){
-        if (this.currentDelay == 0){
             
-            if (this.player.x == this.lane3){
-                this.player.x = this.lane4;
+        if (this.player.x == this.lane3){
+            this.player.x = this.lane4;
 
-            }
-            if (this.player.x == this.lane2){
-                this.player.x = this.lane3;
+        }
+        if (this.player.x == this.lane2){
+            this.player.x = this.lane3;
 
-            }
-            if (this.player.x == this.lane1){
-                this.player.x = this.lane2;
+        }
+        if (this.player.x == this.lane1){
+            this.player.x = this.lane2;
 
-            }
-            this.currentDelay = this.delayTime;
         }
     }
 
     enemyAdd() {
-        if (this.currentTimeSpawn == 0){
 
             var amount = this.getRandomInt(3) + 1;
 
@@ -129,18 +116,15 @@ export default class mainScene extends Phaser.Scene{
                     enemy = this.enemies.create(this.lane1, -256, 'enemy');
                     enemy.body.setVelocityY(900);
                 }
-            }
-
-                this.currentTimeSpawn = this.enemySpawnRate;
         }
     }
 
     powerUpAdd(){
-        function collectpowe (player, star)
+        function collectpowerup (player, powerup)
 {
-    star.disableBody(true, true);
+    powerup.disableBody(true, true);
 
-    score += 10;
+    score += 1000;
     scoreText.setText('Score: ' + score);
 }
         
