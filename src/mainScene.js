@@ -23,14 +23,15 @@ export default class mainScene extends Phaser.Scene{
         this.lane2 = 400;
         this.lane3 = 600; 
         this.lane4 = 800; 
-        this.delayTime = 10;
-        this.currentDelay = 0;
+        this.score = 0;
+        this.scoreText;
     }
 
     create(){
-
         this.player = this.add.sprite(this.lane4, 900-256, 'player')
-        this.player.x = this.lane3;
+        this.player.x = this.lane1;
+
+        console.log(this.player);
 
         this.cursors = this.input.keyboard.createCursorKeys();
 
@@ -42,19 +43,12 @@ export default class mainScene extends Phaser.Scene{
 
         this.timedEvent = this.time.addEvent({ delay: 1000, callback: this.enemyAdd, callbackScope: this, loop: true });
         
-        this.input.keyboard.on('keydown_D', this.moveRight);
+        this.input.keyboard.on('keydown_D', this.moveRight, this);
+        this.input.keyboard.on('keydown_A', this.moveLeft, this);
     }
 
     update(time, delta){
-        if (this.cursors.left.isDown){
-            this.moveLeft();
-        }
-        if (this.cursors.right.isDown){
-            this.moveRight();
-        }
-        if (this.currentDelay > 0){
-            this.currentDelay--;
-        }
+     
     }
 
     enemyCollision(){
@@ -62,6 +56,10 @@ export default class mainScene extends Phaser.Scene{
     }
 
     moveLeft(){
+        
+
+        console.log(this.player);
+
         if (this.player.x == this.lane2){
             this.player.x = this.lane1;
 
@@ -93,43 +91,40 @@ export default class mainScene extends Phaser.Scene{
     }
 
     enemyAdd() {
+        
+        var amount = this.getRandomInt(3) + 1;
 
-            var amount = this.getRandomInt(3) + 1;
-
-            for(var i = 0; i < amount; i++){
-                var x = this.getRandomInt(4) + 1;
-                let enemy;
-                if ( x == 1){
-                    enemy = this.enemies.create(this.lane4, -256, 'enemy');
-                    enemy.body.setEnable();
-                    enemy.body.setVelocityY(900);
-                }
-                else if ( x == 2){
-                    enemy = this.enemies.create(this.lane3, -256, 'enemy');
-                    enemy.body.setVelocityY(900);
-                }
-                else if ( x == 3){
-                    enemy = this.enemies.create(this.lane2, -256, 'enemy');
-                    enemy.body.setVelocityY(900);
-                }
-                else{
-                    enemy = this.enemies.create(this.lane1, -256, 'enemy');
-                    enemy.body.setVelocityY(900);
-                }
+        for(var i = 0; i < amount; i++){
+            var x = this.getRandomInt(4) + 1;
+            let enemy;
+            if ( x == 1){
+                enemy = this.enemies.create(this.lane4, -256, 'enemy');
+                enemy.body.setEnable();
+                enemy.body.setVelocityY(900);
+            }
+            else if ( x == 2){
+                enemy = this.enemies.create(this.lane3, -256, 'enemy');
+                enemy.body.setVelocityY(900);
+            }
+            else if ( x == 3){
+                enemy = this.enemies.create(this.lane2, -256, 'enemy');
+                enemy.body.setVelocityY(900);
+            }
+            else{
+                enemy = this.enemies.create(this.lane1, -256, 'enemy');
+                enemy.body.setVelocityY(900);
+            }
         }
     }
-
     powerUpAdd(){
         function collectpowerup (player, powerup)
-{
-    powerup.disableBody(true, true);
-
-    score += 1000;
-    scoreText.setText('Score: ' + score);
-}
-        
+        {
+            powerup.disableBody(true, true);
+                
+            this.score += 1000;
+            thisscoreText.setText('Score: ' + score);
+        }
     }
-    
 
     getRandomInt(max) {
         return Math.floor(Math.random() * Math.floor(max));
