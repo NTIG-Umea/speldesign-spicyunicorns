@@ -1,4 +1,4 @@
-import Phaser, { Game } from 'phaser';
+import Phaser, { Game, GameObjects } from 'phaser';
 import Assets from './Assets/*.png';
 
 export default class mainScene extends Phaser.Scene{
@@ -7,7 +7,7 @@ export default class mainScene extends Phaser.Scene{
         physics: {
             arcade :{
                 gravity: {y: 200},
-                debug: false
+                debug: true
             }
         }
     });
@@ -28,14 +28,13 @@ export default class mainScene extends Phaser.Scene{
     }
 
     create(){
-        this.player = this.add.sprite(this.lane4, 900-256, 'player')
+        this.player = this.physics.add.sprite(this.lane4, 900-256, 'player').setGravity(0);
+        this.player.body.setAllowGravity(false);
         this.player.x = this.lane1;
-
-        this.cursors = this.input.keyboard.createCursorKeys();
 
         this.enemies = this.physics.add.group();
 
-        this.physics.add.overlap(this.player, this.enemies, this.enemyCollision, this);
+        this.physics.add.overlap(this.player, this.enemies, this.enemyCollision);
 
         this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
 
@@ -46,7 +45,6 @@ export default class mainScene extends Phaser.Scene{
     }
 
     update(time, delta){
-     
     }
 
     enemyCollision(){
@@ -90,25 +88,28 @@ export default class mainScene extends Phaser.Scene{
         var amount = this.getRandomInt(3) + 1;
 
         for(var i = 0; i < amount; i++){
+
             var x = this.getRandomInt(4) + 1;
             let enemy;
+            
             if ( x == 1){
                 enemy = this.enemies.create(this.lane4, -256, 'enemy');
-                enemy.body.setEnable();
-                enemy.body.setVelocityY(900);
+            
             }
             else if ( x == 2){
                 enemy = this.enemies.create(this.lane3, -256, 'enemy');
-                enemy.body.setVelocityY(900);
+            
             }
             else if ( x == 3){
                 enemy = this.enemies.create(this.lane2, -256, 'enemy');
-                enemy.body.setVelocityY(900);
+            
             }
             else{
                 enemy = this.enemies.create(this.lane1, -256, 'enemy');
-                enemy.body.setVelocityY(900);
+            
             }
+            
+            enemy.body.setVelocityY(900);
         }
     }
     powerUpAdd(){
