@@ -7,7 +7,7 @@ export default class mainScene extends Phaser.Scene{
         physics: {
             arcade :{
                 gravity: {y: 200},
-                debug: true
+                debug: false
             }
         }
     });
@@ -21,8 +21,8 @@ export default class mainScene extends Phaser.Scene{
 
         this.lane1 = 200;
         this.lane2 = 400;
-        this.lane3 = 600; 
-        this.lane4 = 800; 
+        this.lane3 = 600;
+        this.lane4 = 800;
         this.score = 0;
         this.scoreText;
     }
