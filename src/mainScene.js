@@ -62,9 +62,9 @@ export default class mainScene extends Phaser.Scene{
     }
 
     update(time, delta){
-        // if (this.lives <= 0){
-        //     console.log("funkar")
-        // }
+        if (this.lives <= 0){
+            console.log("funkar")
+        }
     }
 
     enemyCollisionCheck() {
@@ -75,7 +75,6 @@ export default class mainScene extends Phaser.Scene{
 
     enemyCollision(){
         this.lives--;
-        console.log(this.lives)
     }
 
     moveLeft(){
