@@ -5,13 +5,7 @@ var config = {
     type: Phaser.AUTO,
     width: 1000,
     height: 700,
-    scene: [ mainScene ],
-    physics: {
-        arcade :{
-            gravity: {y: 200},
-            debug: false
-        }
-    }
+    scene: [ mainScene ]
 };
 
 var game = new Phaser.Game(config);
