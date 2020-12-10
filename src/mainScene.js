@@ -17,7 +17,7 @@ export default class mainScene extends Phaser.Scene{
     preload(){
         this.load.image('player', Assets.player);
         this.load.image('enemy', Assets.enemy);
-        this.load.image('powerup', Assets.powerup);
+        this.load.image('powerup', Assets.julmust);
 
         this.lane1 = 200;
         this.lane2 = 400;
@@ -25,7 +25,7 @@ export default class mainScene extends Phaser.Scene{
         this.lane4 = 800;
         this.score = 0;
         this.scoreText;
-        this.frameOverlap;
+        this.collisionDone = 0; 
     }
 
     create(){
@@ -52,8 +52,6 @@ export default class mainScene extends Phaser.Scene{
 
         this.timedEnemyEvent = this.time.addEvent({ delay: 1000, callback: this.enemyAdd, callbackScope: this, loop: true });
 
-        this.timedEnemyCollisionEvent = this.time.addEvent({ delay: 500, callback: this.enemyCollisionCheck, callbackScope: this, loop: true });
-
         this.timedPowerEvent = this.time.addEvent({ delay: Phaser.Math.Between(4000, 10000), callback: this.powerUpAdd, callbackScope: this, loop: true });
         
 
@@ -66,7 +64,12 @@ export default class mainScene extends Phaser.Scene{
             this.scene.start("restartScene");
         }
 
-        console.log(this.lives)
+        if (this.physics.overlap(this.player, this.enemies)){
+            if (this.collisionDone == 0){
+                this.enemyCollision();
+            }
+        } else 
+            this.collisionDone = 0
     }
 
     enemyCollisionCheck() {
@@ -76,7 +79,9 @@ export default class mainScene extends Phaser.Scene{
     }
 
     enemyCollision(){
+        this.collisionDone = 1;
         this.lives--;
+        console.log(this.lives)
     }
 
     moveLeft(){
