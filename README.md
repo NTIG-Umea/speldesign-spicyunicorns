@@ -3,24 +3,16 @@
 
 TODO
 
-
-Animation for player movement
-Background moving
 Powerup placer
 Powerups effect
-
+Background moving
+Animation for player movement
 
 In progress
 
-
-player collision
-
-
 Scoring system
-player movement
 
-
-
+enemy collision
 
 Done
 
