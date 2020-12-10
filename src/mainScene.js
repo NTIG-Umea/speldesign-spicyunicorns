@@ -81,7 +81,6 @@ export default class mainScene extends Phaser.Scene{
     enemyCollision(){
         this.collisionDone = 1;
         this.lives--;
-        console.log(this.lives)
     }
 
     moveLeft(){
