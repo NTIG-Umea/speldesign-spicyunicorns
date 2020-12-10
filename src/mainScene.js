@@ -63,8 +63,10 @@ export default class mainScene extends Phaser.Scene{
 
     update(time, delta){
         if (this.lives <= 0){
-            console.log("funkar")
+            this.scene.start("restartScene");
         }
+
+        console.log(this.lives)
     }
 
     enemyCollisionCheck() {
@@ -167,13 +169,13 @@ export default class mainScene extends Phaser.Scene{
        }
        
        
-        collectpowerup (player, powerup)
-        {
-            powerup.disableBody(true, true);
-                
-            this.score += 1000;
-            thisscoreText.setText('Score: ' + score);
-        }
+    collectpowerup (player, powerup)
+    {
+        powerup.disableBody(true, true);
+            
+        this.score += 1000;
+        thisscoreText.setText('Score: ' + score);
+    }
 
     getRandomInt(max){
         return Math.floor(Math.random() * Math.floor(max));
