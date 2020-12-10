@@ -4,12 +4,6 @@ import Assets from './Assets/*.png';
 export default class mainScene extends Phaser.Scene{
     constructor(){
         super({key:"mainScene", 
-        physics: {
-            arcade :{
-                gravity: {y: 200},
-                debug: false
-            }
-        }
     });
     }
     
@@ -25,16 +19,18 @@ export default class mainScene extends Phaser.Scene{
         this.lane4 = 800;
         this.score = 0;
         this.scoreText;
+        this.lives = 3;
     }
 
     create(){
         this.player = this.physics.add.sprite(this.lane4, 900-256, 'player').setGravity(0);
         this.player.body.setAllowGravity(false);
+        
         this.player.x = this.lane1;
 
         this.enemies = this.physics.add.group();
 
-        this.physics.add.overlap(this.player, this.enemies, this.enemyCollision);
+        this.physics.add.overlap(this.player, this.enemies, this.enemyAdd());
 
         this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
 
@@ -45,10 +41,13 @@ export default class mainScene extends Phaser.Scene{
     }
 
     update(time, delta){
+        if (this.lives <= 0){
+            
+        }
     }
 
     enemyCollision(){
-        console.log("funkar");
+        this.lives--;
     }
 
     moveLeft(){
@@ -113,6 +112,12 @@ export default class mainScene extends Phaser.Scene{
         }
     }
     powerUpAdd(){
+       
+       var amount
+       
+       
+       
+       
         function collectpowerup (player, powerup)
         {
             powerup.disableBody(true, true);
