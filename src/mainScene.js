@@ -8,9 +8,9 @@ export default class mainScene extends Phaser.Scene{
             arcade :{
                 gravity: {y: 200},
                 debug: false
-            }
-        }
-    });
+                }
+            },
+        });
     }
     
 
@@ -25,40 +25,57 @@ export default class mainScene extends Phaser.Scene{
         this.lane4 = 800;
         this.score = 0;
         this.scoreText;
+        this.frameOverlap;
     }
 
     create(){
-        this.lives == 3;
+        this.lives = 3;
 
         this.player = this.physics.add.sprite(this.lane4, 900-256, 'player').setGravity(0);
-        this.player.body.setAllowGravity(false);
         
+        this.player.body.setAllowGravity(false);
+
+        this.player
+        
+
         this.player.x = this.lane1;
+
 
         this.enemies = this.physics.add.group();
         
+
         this.powerUpGroup = this.physics.add.group();
 
-        this.physics.add.overlap(this.player, this.enemies, this.enemyCollision);
 
         this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
 
+
         this.timedEnemyEvent = this.time.addEvent({ delay: 1000, callback: this.enemyAdd, callbackScope: this, loop: true });
+
+        this.timedEnemyCollisionEvent = this.time.addEvent({ delay: 500, callback: this.enemyCollisionCheck, callbackScope: this, loop: true });
+
         this.timedPowerEvent = this.time.addEvent({ delay: Phaser.Math.Between(4000, 10000), callback: this.powerUpAdd, callbackScope: this, loop: true });
         
+
         this.input.keyboard.on('keydown_D', this.moveRight, this);
         this.input.keyboard.on('keydown_A', this.moveLeft, this);
     }
 
     update(time, delta){
-        if (this.lives <= 0){
-            console.log("funkar")
+        // if (this.lives <= 0){
+        //     console.log("funkar")
+        // }
+    }
+
+    enemyCollisionCheck() {
+        if (this.physics.overlap(this.player, this.enemies)){
+            this.enemyCollision();
         }
     }
 
     enemyCollision(){
         this.lives--;
-        console.log(this.lives);
+        console.log(this.lives)
     }
 
     moveLeft(){
@@ -131,7 +148,7 @@ export default class mainScene extends Phaser.Scene{
             let powerup;
             
             if ( x == 1){
-                powerup = this.powerUpGroup.create(this.lane4, -256, 'enemy');
+                powerup = this.powerUpGroup.create(this.lane4, -256, 'powerup');
             
             }
             else if ( x == 2){
