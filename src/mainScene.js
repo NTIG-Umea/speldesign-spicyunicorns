@@ -6,7 +6,7 @@ export default class mainScene extends Phaser.Scene{
         super({key:"mainScene", 
         physics: {
             arcade :{
-                gravity: {y: 200},
+                gravity: {y: 0},
                 debug: false
                 }
             },
@@ -17,7 +17,7 @@ export default class mainScene extends Phaser.Scene{
     preload(){
         this.load.image('player', Assets.player);
         this.load.image('enemy', Assets.enemy);
-        this.load.image('powerup', Assets.julmust);
+        this.load.image('julmust', Assets.julmust);
 
         this.lane1 = 200;
         this.lane2 = 400;
@@ -25,7 +25,8 @@ export default class mainScene extends Phaser.Scene{
         this.lane4 = 800;
         this.score = 0;
         this.scoreText;
-        this.collisionDone = 0; 
+        this.collisionDone = 0;
+        
     }
 
     create(){
@@ -68,13 +69,17 @@ export default class mainScene extends Phaser.Scene{
             if (this.collisionDone == 0){
                 this.enemyCollision();
             }
-        } else 
+        } else {
             this.collisionDone = 0
+        } 
+        
+        console.log(this.enemies.getLength())
     }
 
     enemyCollisionCheck() {
         if (this.physics.overlap(this.player, this.enemies)){
             this.enemyCollision();
+            this.enemies.setVelocityY(0)
         }
     }
 
@@ -115,8 +120,7 @@ export default class mainScene extends Phaser.Scene{
         }
     }
 
-    enemyAdd() {
-        
+    enemyAdd() {        
         var amount = this.getRandomInt(3) + 1;
 
         for(var i = 0; i < amount; i++){
@@ -140,9 +144,14 @@ export default class mainScene extends Phaser.Scene{
                 enemy = this.enemies.create(this.lane1, -256, 'enemy');
             
             }
-            
             enemy.body.setVelocityY(900);
+            
+            var timer = this.time.delayedCall(4000, this.remove(enemy)); 
         }
+    }
+    
+    remove(enemy) {
+        enemy.remove
     }
 
     powerUpAdd(){
@@ -153,19 +162,19 @@ export default class mainScene extends Phaser.Scene{
             let powerup;
             
             if ( x == 1){
-                powerup = this.powerUpGroup.create(this.lane4, -256, 'powerup');
+                powerup = this.powerUpGroup.create(this.lane4, -256, 'julmust');
             
             }
             else if ( x == 2){
-                powerup = this.powerUpGroup.create(this.lane3, -256, 'powerup');
+                powerup = this.powerUpGroup.create(this.lane3, -256, 'julmust');
             
             }
             else if ( x == 3){
-                powerup = this.powerUpGroup.create(this.lane2, -256, 'powerup');
+                powerup = this.powerUpGroup.create(this.lane2, -256, 'julmust');
             
             }
             else{
-                powerup = this.powerUpGroup.create(this.lane1, -256, 'powerup');
+                powerup = this.powerUpGroup.create(this.lane1, -256, 'julmust');
             
             }
             
