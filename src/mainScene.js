@@ -33,7 +33,7 @@ export default class mainScene extends Phaser.Scene{
         this.lives = 3;
         this.score = 0;
 
-        this.player = this.physics.add.sprite(this.lane4, 900-256, 'player').setGravity(0);
+        this.player = this.physics.add.sprite(this.lane4, 900-128, 'player').setGravity(0);
         
         this.player.body.setAllowGravity(false);
 
@@ -196,6 +196,7 @@ export default class mainScene extends Phaser.Scene{
        
     powerUpCollision ()
     {
+        this.powerUpGroup.clear(true);
         this.collisionDonePower = 1;
         
         this.score += 1000;

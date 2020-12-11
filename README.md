@@ -3,9 +3,7 @@
 
 TODO
 
-
 Background moving
-
 
 In progress
 

@@ -6,7 +6,7 @@ import bootScene from './bootScene';
 var config = {
     type: Phaser.AUTO,
     width: 1000,
-    height: 700,
+    height: 900,
     scene: [ bootScene, mainScene , restartScene]
 };
 
