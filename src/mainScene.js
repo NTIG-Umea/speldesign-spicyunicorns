@@ -23,13 +23,15 @@ export default class mainScene extends Phaser.Scene{
         this.lane2 = 400;
         this.lane3 = 600;
         this.lane4 = 800;
-        this.score = 0;
         this.scoreText;
-        this.collisionDone = 0; 
+        this.collisionDoneEnemy = 0;
+        this.collisionDonePower = 0;
+        this.speedScale = 1; 
     }
 
     create(){
         this.lives = 3;
+        this.score = 0;
 
         this.player = this.physics.add.sprite(this.lane4, 900-256, 'player').setGravity(0);
         
@@ -46,15 +48,16 @@ export default class mainScene extends Phaser.Scene{
 
         this.powerUpGroup = this.physics.add.group();
 
+        this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#0f0' });
 
-        this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+        this.timeSpeed = this.time.addEvent({delay: 10000, callback: this.speedAdd(), callbackScope: this, loop: true});
 
+        this.timedPowerEvent = this.time.addEvent({ delay: Phaser.Math.Between(4300, 7700), callback: this.powerUpAdd, callbackScope: this, loop: true });
 
         this.timedEnemyEvent = this.time.addEvent({ delay: 1000, callback: this.enemyAdd, callbackScope: this, loop: true });
 
-        this.timedPowerEvent = this.time.addEvent({ delay: Phaser.Math.Between(4000, 10000), callback: this.powerUpAdd, callbackScope: this, loop: true });
+        this.timedScore = this.time.addEvent({delay: 10, callback: this.scoreAdd, callbackScope: this, loop: true});
         
-
         this.input.keyboard.on('keydown_D', this.moveRight, this);
         this.input.keyboard.on('keydown_A', this.moveLeft, this);
     }
@@ -70,6 +73,15 @@ export default class mainScene extends Phaser.Scene{
             }
         } else 
             this.collisionDone = 0
+
+        if (this.physics.overlap(this.player, this.powerUpGroup)){
+            if (this.collisionDonePower == 0){
+                this.powerUpCollision();
+            }
+        } else 
+            this.collisionDonePower = 0
+
+        this.scoreText.setText('Score: ' + this.score);
     }
 
     enemyCollisionCheck() {
@@ -81,6 +93,15 @@ export default class mainScene extends Phaser.Scene{
     enemyCollision(){
         this.collisionDone = 1;
         this.lives--;
+    }
+
+    speedAdd(){
+        this.speedScale *= 1.2;
+    }
+
+    scoreAdd(){
+        this.score++;
+        this.scoreText
     }
 
     moveLeft(){
@@ -141,7 +162,7 @@ export default class mainScene extends Phaser.Scene{
             
             }
             
-            enemy.body.setVelocityY(900);
+            enemy.body.setVelocityY(900*this.speedScale);
         }
     }
 
@@ -169,16 +190,15 @@ export default class mainScene extends Phaser.Scene{
             
             }
             
-            powerup.body.setVelocityY(900);
+            powerup.body.setVelocityY(900*this.speedScale);
        }
        
        
-    collectpowerup (player, powerup)
+    powerUpCollision ()
     {
-        powerup.disableBody(true, true);
-            
+        this.collisionDonePower = 1;
+        
         this.score += 1000;
-        thisscoreText.setText('Score: ' + score);
     }
 
     getRandomInt(max){

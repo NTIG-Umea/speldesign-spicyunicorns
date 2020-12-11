@@ -1,8 +1,8 @@
 import Phaser, { Game, GameObjects } from 'phaser';
 
-export default class restartScene extends Phaser.Scene{
+export default class BootScene extends Phaser.Scene{
     constructor(){
-        super({key:"restartScene"});
+        super({key:"bootScene"});
     }
 
     preload(){  
@@ -10,13 +10,13 @@ export default class restartScene extends Phaser.Scene{
     }
 
     create(){
-        this.add.text(450, 300, 'You Lost', {fill: '#0f0'});
+        this.add.text(450, 300, 'WELCOME TO GRINKEN ESCAPE', {fill: '#0f0'});
 
         this.button();
     }
     
     button() {
-        const populateButton = this.add.text(450,350, 'Restart Game', {fill: '#0f0'})
+        const startButton = this.add.text(450,350, 'Start Game', {fill: 'red'})
             .setInteractive()
             .on('pointerdown', () => this.startMain() );
     }
