@@ -78,13 +78,15 @@ export default class mainScene extends Phaser.Scene{
             if (this.collisionDonePower == 0){
                 this.powerUpCollision();
             }
-        } else 
+        } else {
             this.collisionDonePower = 0
+        } 
 
         this.scoreText.setText('Score: ' + this.score);
+        }
     }
 
-    enemyCollisionCheck() {
+    enemyCollisionCheck(){
         if (this.physics.overlap(this.player, this.enemies)){
             this.enemyCollision();
             this.enemies.setVelocityY(0)
