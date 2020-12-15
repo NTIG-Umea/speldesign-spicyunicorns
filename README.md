@@ -1,15 +1,15 @@
 # speldesign-spicyunicorns
 
 
-TODO
+##TODO
 
 Background moving
 
-In progress
+##In progress
 
 Animation for player movement
 
-Done
+##Done
 
 
 Movement for player
