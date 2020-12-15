@@ -16,8 +16,9 @@ export default class mainScene extends Phaser.Scene{
 
     preload(){
         this.load.image('player', Assets.player);
-        this.load.image('enemy', Assets.enemy);
         this.load.image('julmust', Assets.julmust);
+        this.load.image('enemy', Assets.enemy);
+        this.load.multiatlas('nisse', 'assets/nisse_stand.json', 'assets/');
 
         this.lane1 = 200;
         this.lane2 = 400;
@@ -27,6 +28,7 @@ export default class mainScene extends Phaser.Scene{
         this.collisionDoneEnemy = 0;
         this.collisionDonePower = 0;
         this.speedScale = 1; 
+        this.toggle = 0;
     }
 
     create(){
@@ -39,13 +41,11 @@ export default class mainScene extends Phaser.Scene{
 
         this.player
         
-
         this.player.x = this.lane1;
 
 
         this.enemies = this.physics.add.group();
         
-
         this.powerUpGroup = this.physics.add.group();
 
         this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#0f0' });
@@ -57,6 +57,17 @@ export default class mainScene extends Phaser.Scene{
         this.timedEnemyEvent = this.time.addEvent({ delay: 1000, callback: this.enemyAdd, callbackScope: this, loop: true });
 
         this.timedScore = this.time.addEvent({delay: 10, callback: this.scoreAdd, callbackScope: this, loop: true});
+
+        this.anims.create({
+            key: "idle",
+            frameRate: 4,
+            frames: this.anims.generateFrameNames('nisse', {
+                frames: [
+                    'Nisse2.png', 'Nisse1.png'
+                ]
+            }),
+            repeat: -1
+        });
         
         this.input.keyboard.on('keydown_D', this.moveRight, this);
         this.input.keyboard.on('keydown_A', this.moveLeft, this);
@@ -147,23 +158,24 @@ export default class mainScene extends Phaser.Scene{
             let enemy;
             
             if ( x == 1){
-                enemy = this.enemies.create(this.lane4, -256, 'enemy');
+                enemy = this.enemies.create(this.lane4, -256, 'nisse', 'Nisse2.png');
             
             }
             else if ( x == 2){
-                enemy = this.enemies.create(this.lane3, -256, 'enemy');
+                enemy = this.enemies.create(this.lane3, -256, 'nisse', 'Nisse2.png');
             
             }
             else if ( x == 3){
-                enemy = this.enemies.create(this.lane2, -256, 'enemy');
+                enemy = this.enemies.create(this.lane2, -256, 'nisse', 'Nisse2.png');
             
             }
             else{
-                enemy = this.enemies.create(this.lane1, -256, 'enemy');
+                enemy = this.enemies.create(this.lane1, -256, 'nisse', 'Nisse2.png');
             
             }
             
             enemy.body.setVelocityY(900*this.speedScale);
+            enemy.anims.play('idle', true);
         }
     }
     
