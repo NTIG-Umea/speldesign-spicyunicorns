@@ -79,35 +79,34 @@ export default class mainScene extends Phaser.Scene{
                 this.powerUpCollision();
             }
         } else {
-            this.collisionDonePower = 0
-        } 
-
-        this.scoreText.setText('Score: ' + this.score);
+            this.collisionDonePower = 0;
+            } 
         }
+        this.scoreText.setText('Score: ' + this.score);
     }
 
-    enemyCollisionCheck(){
+    enemyCollisionCheck() {
         if (this.physics.overlap(this.player, this.enemies)){
             this.enemyCollision();
             this.enemies.setVelocityY(0)
         }
     }
 
-    enemyCollision(){
+    enemyCollision() {
         this.collisionDone = 1;
         this.lives--;
     }
 
-    speedAdd(){
+    speedAdd() {
         this.speedScale *= 1.2;
     }
 
-    scoreAdd(){
+    scoreAdd() {
         this.score++;
         this.scoreText
     }
 
-    moveLeft(){
+    moveLeft() {
 
         if (this.player.x == this.lane2){
             this.player.x = this.lane1;
@@ -123,7 +122,7 @@ export default class mainScene extends Phaser.Scene{
         }
     }
 
-    moveRight(){
+    moveRight() {
             
         if (this.player.x == this.lane3){
             this.player.x = this.lane4;
@@ -200,7 +199,7 @@ export default class mainScene extends Phaser.Scene{
        }
        
        
-    powerUpCollision ()
+    powerUpCollision()
     {
         this.powerUpGroup.clear(true);
         this.collisionDonePower = 1;

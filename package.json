@@ -4,7 +4,7 @@
   "description": "A Phaser 3 game template using Parcel bundler",
   "main": "src/index.html",
   "scripts": {
-    "build": "parcel build src/index.html -d docs/ --public-url /SPELDESIGN-SPICYUNICORN --experimental-scope-hoisting",
+    "build": "parcel build src/index.html -d docs/ --public-url /speldesign-spicyunicorns --experimental-scope-hoisting",
     "watch": "parcel watch src/index.html -d docs/",
     "start": "parcel serve src/index.html -d docs/",
     "clean": "rm -v dist/*",
