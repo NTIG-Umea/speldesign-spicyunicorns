@@ -1,4 +1,5 @@
 import Phaser, { Game, GameObjects } from 'phaser';
+import Image from './Assets/start.png';
 
 export default class BootScene extends Phaser.Scene{
     constructor(){
@@ -6,18 +7,18 @@ export default class BootScene extends Phaser.Scene{
     }
 
     preload(){  
-
+        this.load.image('start', Image);
     }
 
     create(){
-        this.add.text(450, 300, 'WELCOME TO GRINKEN ESCAPE', {fill: '#0f0'});
+        this.add.text(380, 400, 'WELCOME TO GRINKEN ESCAPE', {fill: '#0f0'});
 
         this.button();
     }
     
     button() {
-        const startButton = this.add.text(450,350, 'Start Game', {fill: 'red'})
-            .setInteractive()
+        const startButton = this.add.image(500,450, 'start')
+            .setInteractive().setScale(0.2)
             .on('pointerdown', () => this.startMain() );
     }
 
