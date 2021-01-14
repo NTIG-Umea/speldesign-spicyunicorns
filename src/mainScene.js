@@ -141,101 +141,115 @@ export default class mainScene extends Phaser.Scene{
     }
 
     enemyAdd() {
-        var checked1 = false;
-        var checked2 = false;
-        var checked3 = false;
-        var checked4 = false;
-
-        var amount = this.getRandomInt(3) + 1;
-
-        for(var i = 0; i < amount; i++){
-
-            var x = this.getRandomInt(4) + 1;
-            let enemy;
-            
-            if ( x == 1){
-                if (checked1 == false){
-
-                    
-                    var y = this.getRandomInt(3)+1;
-                    if ( y == 2) {
-                        enemy = this.enemies.create(this.lane4, -256, 'nisse', 'Nisse2.png');
-                    }
-                    if (y == 3) {
-                        enemy = this.enemies.create(this.lane4, -256, 'stump', 'stubbe_med_yxa_med_snö.png');
-                    }
-                    else {
-                        enemy = this.enemies.create(this.lane4, -256, 'wood', 'ved_med_snö.png');
-                    }
-                    checked1 = true;
-                }
-            }
-            else if ( x == 2){
-                var y = this.getRandomInt(3)+1;
-                if(checked2 == false){
-
-                    console.log(y);
-                    if ( y == 1) {
-                        enemy = this.enemies.create(this.lane3, -256, 'nisse', 'Nisse2.png');
-                    }
-                    if (y == 2) {
-                        enemy = this.enemies.create(this.lane3, -256, 'stump', 'stubbe_med_yxa_med_snö.png');
-                    }
-                    else {
-                        enemy = this.enemies.create(this.lane3, -256, 'wood', 'ved_med_snö.png');
-                    }
-                    checked3 = true;
-                }
-            }
-            else if ( x == 3){
-                var y = this.getRandomInt(3)+1;
-                if(checked3 == false){
-
-                    console.log(y);
-                    if ( y == 1) {
-                        enemy = this.enemies.create(this.lane2, -256, 'nisse', 'Nisse2.png');
-                    }
-                    if (y == 2) {
-                        enemy = this.enemies.create(this.lane2, -256, 'stump', 'stubbe_med_yxa_med_snö.png');
-                    }
-                    else {
-                        enemy = this.enemies.create(this.lane2, -256, 'wood', 'ved_med_snö.png');
-                    }
-                    checked3 = true;
-                }
-            
-            }
-            else{
-                var y = this.getRandomInt(3)+1;
-                if(checked4 == false){
-
-                    console.log(y);
-                    if ( y == 1) {
-                        enemy = this.enemies.create(this.lane1, -256, 'nisse', 'Nisse2.png');
-                    }
-                    if (y == 2) {
-                        enemy = this.enemies.create(this.lane1 , -256, 'stump', 'stubbe_med_yxa_med_snö.png');
-                    }
-                    else{
-                        enemy = this.enemies.create(this.lane1 , -256, 'wood', 'ved_med_snö.png');
-                    }
-                    checked4 = true;
-                }
-            }
-            
-            enemy.body.setVelocityY(900*this.speedScale);
-        }
-    }
+        var amount = this.getRandomInt(3)+1;
     
-    remove(enemy) {
-        enemy.remove
+        var checked1 = 0;
+        var checked2 = 0;
+        var checked3 = 0;
+        var checked4 = 0;
+
+        var checker = 3; 
+    
+        for(var i = 0; i < amount; i++){ 
+    
+            var x = this.getRandomInt(3) + 1;
+            let enemy;
+    
+            if (checked1 == 1) {
+                x = 2;
+            }
+            
+            if (checker > 0) {
+
+                if ( x == 1){
+                    if (checked1 == 0){
+                        
+                        var y = this.getRandomInt(2);
+                        
+                        console.log(y);
+                        
+                        if ( y == 0) {
+                            enemy = this.enemies.create(this.lane1, -256 , 'nisse', 'Nisse2.png');
+                        }
+                        else if (y == 1) {
+                            enemy = this.enemies.create(this.lane1, -256, 'stump', 'stubbe_med_yxa_med_snö.png');
+                        }
+                        else{
+                            enemy = this.enemies.create(this.lane1, -256, 'wood', 'ved_med_snö.png');
+                        }
+                        enemy.body.setVelocityY(900*this.speedScale);
+                        checked1 = 1;
+                    }
+                }
+                
+                if ( x == 2){
+                    var y = this.getRandomInt(2);
+                    if(checked2 == 0){
+                        
+                        if ( y == 0) {
+                            enemy = this.enemies.create(this.lane2, -256 , 'nisse', 'Nisse2.png');
+                        }
+                        else if (y == 1) {
+                            enemy = this.enemies.create(this.lane2, -256, 'stump', 'stubbe_med_yxa_med_snö.png');
+                        }
+                        else {
+                            enemy = this.enemies.create(this.lane2, -256, 'wood', 'ved_med_snö.png');
+                        }
+                        enemy.body.setVelocityY(900*this.speedScale);
+                        checked2 = 1;
+                    }
+                }
+                  
+                if ( x == 3){
+                    var y = this.getRandomInt(2);
+                    if(checked3 == 0){
+                        
+                        console.log(y);
+                        if (y == 0) {
+                            enemy = this.enemies.create(this.lane3, -256 , 'nisse', 'Nisse2.png');
+                        }
+                        else if (y == 1) {
+                            enemy = this.enemies.create(this.lane3, -256, 'stump', 'stubbe_med_yxa_med_snö.png');
+                        }
+                        else {
+                            enemy = this.enemies.create(this.lane3, -256, 'wood', 'ved_med_snö.png');
+                        }
+                        enemy.body.setVelocityY(900*this.speedScale);
+                        checked3 = 1;
+                    }
+                }
+
+                if (x == 4){
+                    var y = this.getRandomInt(2);
+                    if(checked4 == 0){
+                        
+                        console.log(y);
+                        if ( y == 0) {
+                            enemy = this.enemies.create(this.lane4, -256, 'nisse', 'Nisse2.png');
+                        }
+                        else if (y == 1) {
+                            enemy = this.enemies.create(this.lane4, -256, 'stump', 'stubbe_med_yxa_med_snö.png');
+                        }
+                        else{
+                            enemy = this.enemies.create(this.lane4, -256, 'wood', 'ved_med_snö.png');              
+                        }
+                        enemy.body.setVelocityY(900*this.speedScale);
+                        checked4 = 1;
+                    }
+                    if (checked4 == 1) {
+                        x = 1; 
+                    }
+                }
+            }
+            checker--;
+        }
     }
 
     powerUpAdd(){
         
-        var amount = this.getRandomInt(3) + 1;
+        var amount = this.getRandomInt(3);
 
-            var x = this.getRandomInt(4) + 1;
+            var x = this.getRandomInt(4);
             let powerup;
             
             if ( x == 1){
@@ -268,6 +282,6 @@ export default class mainScene extends Phaser.Scene{
     }
 
     getRandomInt(max){
-        return Math.floor(Math.random() * Math.floor(max));
+        return Math.round(Math.random() * max);
       }
 }
