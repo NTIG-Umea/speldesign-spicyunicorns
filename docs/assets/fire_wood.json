@@ -1,0 +1,61 @@
+{
+	"textures": [
+		{
+			"image": "fire_wood.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 132,
+				"h": 32
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "ved_med_snö.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 68,
+						"h": 68
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 36,
+						"w": 66,
+						"h": 32
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 66,
+						"h": 32
+					}
+				},
+				{
+					"filename": "ved_utan_snö.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 68,
+						"h": 68
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 36,
+						"w": 66,
+						"h": 32
+					},
+					"frame": {
+						"x": 66,
+						"y": 0,
+						"w": 66,
+						"h": 32
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "http://free-tex-packer.com",
+		"version": "0.6.6"
+	}
+}
