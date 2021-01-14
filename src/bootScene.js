@@ -11,13 +11,14 @@ export default class BootScene extends Phaser.Scene{
     }
 
     create(){
-        this.add.text(380, 400, 'WELCOME TO GRINKEN ESCAPE', {fill: '#0f0'});
+        this.add.text(380, 300, 'WELCOME TO GRINKEN ESCAPE', {fill: '#0f0'});
+        this.add.text(380, 400, 'Use A and D for movement',{fill: '#FFF'} );
 
         this.button();
     }
     
     button() {
-        const startButton = this.add.image(500,450, 'start')
+        const startButton = this.add.image(500,350, 'start')
             .setInteractive().setScale(0.2)
             .on('pointerdown', () => this.startMain() );
     }
