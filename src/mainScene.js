@@ -17,7 +17,7 @@ export default class mainScene extends Phaser.Scene{
     preload(){
         this.load.image('player', Assets.player);
         this.load.image('julmust', Assets.julmust);
-        this.load.image('enemy', Assets.enemy);
+        this.load.image('heart', Assets.heart);
         this.load.multiatlas('nisse', 'assets/nisse_stand.json', 'assets/');
         this.load.multiatlas('stump', 'assets/stump.json', 'assets/');
         this.load.multiatlas('wood', 'assets/fire_wood.json', 'assets/');
@@ -38,6 +38,8 @@ export default class mainScene extends Phaser.Scene{
         this.score = 0;
 
         this.player = this.physics.add.sprite(this.lane4, 900-128, 'player').setGravity(0);
+
+    
         
         this.player.body.setAllowGravity(false);
 
@@ -49,6 +51,8 @@ export default class mainScene extends Phaser.Scene{
         this.enemies = this.physics.add.group();
         
         this.powerUpGroup = this.physics.add.group();
+
+        this.heartCounter = this.add.text(1000-70,16, '3/3', { fontSize: '32px', fill: '#FFF'});
 
         this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#0f0' });
 
@@ -85,6 +89,7 @@ export default class mainScene extends Phaser.Scene{
             } 
         }
         this.scoreText.setText('Score: ' + this.score);
+        this.heartCounter.setText(this.lives + '/3')
     }
 
     enemyCollisionCheck() {
