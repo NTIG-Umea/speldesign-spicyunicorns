@@ -171,8 +171,6 @@ export default class mainScene extends Phaser.Scene{
                         
                         var y = this.getRandomInt(2);
                         
-                        console.log(y);
-                        
                         if ( y == 0) {
                             enemy = this.enemies.create(this.lane1, -256 , 'nisse', 'Nisse2.png');
                         }
@@ -208,8 +206,7 @@ export default class mainScene extends Phaser.Scene{
                 if ( x == 3){
                     var y = this.getRandomInt(2);
                     if(checked3 == 0){
-                        
-                        console.log(y);
+
                         if (y == 0) {
                             enemy = this.enemies.create(this.lane3, -256 , 'nisse', 'Nisse2.png');
                         }
@@ -227,8 +224,7 @@ export default class mainScene extends Phaser.Scene{
                 if (x == 4){
                     var y = this.getRandomInt(2);
                     if(checked4 == 0){
-                        
-                        console.log(y);
+
                         if ( y == 0) {
                             enemy = this.enemies.create(this.lane4, -256, 'nisse', 'Nisse2.png');
                         }
