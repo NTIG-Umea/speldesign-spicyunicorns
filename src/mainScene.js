@@ -21,6 +21,7 @@ export default class mainScene extends Phaser.Scene{
         this.load.multiatlas('nisse', 'assets/nisse_stand.json', 'assets/');
         this.load.multiatlas('stump', 'assets/stump.json', 'assets/');
         this.load.multiatlas('wood', 'assets/fire_wood.json', 'assets/');
+        this.load.multiatlas('snow', 'assets/snow.json', 'assets/');
 
         this.lane1 = 200;
         this.lane2 = 400;
