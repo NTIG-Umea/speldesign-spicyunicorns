@@ -5,8 +5,13 @@ import bootScene from './bootScene';
 
 var config = {
     type: Phaser.AUTO,
-    width: 1000,
-    height: 800,
+    mode: Phaser.Scale.FIT,
+    scale: {
+        parent: 'yourgamediv',
+        mode: Phaser.Scale.FIT,
+        width: 1000,
+        height: 800
+    },
     scene: [ bootScene, mainScene , restartScene]
 };
 
