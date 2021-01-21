@@ -38,22 +38,17 @@ export default class mainScene extends Phaser.Scene{
         this.lives = 3;
         this.score = 0;
 
-        this.player = this.physics.add.sprite(this.lane4, 900-128, 'player').setGravity(0);
+        this.player = this.physics.add.sprite(this.lane4, 800-128, 'player').setGravity(0);
 
-    
-        
         this.player.body.setAllowGravity(false);
 
-        this.player
-        
         this.player.x = this.lane1;
-
 
         this.enemies = this.physics.add.group();
         
         this.powerUpGroup = this.physics.add.group();
 
-        this.heartCounter = this.add.text(1000-70,16, '3/3', { fontSize: '32px', fill: '#FFF'});
+        this.heartCounter = this.add.text(1000-70,16, '3', { fontSize: '32px', fill: '#FFF'});
 
         this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#0f0' });
 
@@ -90,7 +85,7 @@ export default class mainScene extends Phaser.Scene{
             } 
         }
         this.scoreText.setText('Score: ' + this.score);
-        this.heartCounter.setText(this.lives + '/3')
+        this.heartCounter.setText(this.lives);
     }
 
     enemyCollisionCheck() {
@@ -211,7 +206,7 @@ export default class mainScene extends Phaser.Scene{
                         if (y == 0) {
                             enemy = this.enemies.create(this.lane3, -256 , 'nisse', 'Nisse2.png');
                         }
-                        else if (y == 1) {
+                        else if (y == 1) { 
                             enemy = this.enemies.create(this.lane3, -256, 'stump', 'stubbe_med_yxa_med_snö.png');
                         }
                         else {
