@@ -1,5 +1,6 @@
 import Phaser, { Game, GameObjects } from 'phaser';
 import Assets from './Assets/*.png';
+import Hiscore from './Hiscore.js';
 
 export default class mainScene extends Phaser.Scene{
     constructor(){
@@ -86,6 +87,10 @@ export default class mainScene extends Phaser.Scene{
         }
         this.scoreText.setText('Score: ' + this.score);
         this.heartCounter.setText(this.lives);
+
+        if (this.lives <= 0) {
+            this.scorePost();
+        }
     }
 
     enemyCollisionCheck() {
@@ -280,5 +285,13 @@ export default class mainScene extends Phaser.Scene{
 
     getRandomInt(max){
         return Math.round(Math.random() * max);
+      }
+
+      scorePost(){
+        const hiscore = new Hiscore('http://localhost:3000');
+
+        let name = prompt('Skriv dina initialer: ');z
+        
+        hiscore.postScore(1, this.score, name);
       }
 }
