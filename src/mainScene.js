@@ -17,7 +17,7 @@ export default class mainScene extends Phaser.Scene {
 
 
     preload() {
-        this.load.image('player', Assets.player);
+        this.load.image('player', Assets.grink);
         this.load.image('julmust', Assets.julmust);
         this.load.image('heart', Assets.heart);
         this.load.multiatlas('nisse', 'assets/nisse_stand.json', 'assets/');
